@@ -3,9 +3,9 @@ import Ticket from './ticket'
 
 class Main extends React.Component {
 
-  // this.state = {
-  //   flights: []
-  // }
+  state = {
+    tickets: []
+  }
 
   componentDidMount = () => {
     this.fetchApiOne()
@@ -19,17 +19,22 @@ class Main extends React.Component {
       }
     })
     .then(res => res.json())
-    // .then(json => {
-    //   this.setState({
-    //     flights: json.data
-    //   })
-    // })
+    .then(json => {
+      this.setState({
+        tickets: json.data
+      })
+    })
+  }
+
+  showState = () => {
+    console.log(this.state)
   }
 
   render () {
     return(
       <div>
         <Ticket />
+        <button onClick={this.showState}>STATE</button>
       </div>
     )
   }
