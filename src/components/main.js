@@ -26,17 +26,26 @@ class Main extends React.Component {
     })
   }
 
-  showState = () => {
-    console.log(this.state)
+  generateTickets = () => {
+    return this.state.tickets.map(ticketObj =>
+      <Ticket key={ticketObj.id} ticket={ticketObj}/>
+    )
   }
 
   render () {
-    return(
-      <div>
-        <Ticket />
-        <button onClick={this.showState}>STATE</button>
-      </div>
-    )
+    if (this.state.tickets.length == 0) {
+      return(
+        <div>
+        LOADING
+        </div>
+      )
+    } else {
+      return(
+        <div>
+          {this.generateTickets()}
+        </div>
+      )
+    }
   }
 }
 
