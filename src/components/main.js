@@ -14,12 +14,8 @@ class Main extends React.Component {
 
   }
 
-  componentDidMount = () => {
-    // this.fetchApiOne()
-  }
-
   fetchApiOne = () => {
-    fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${this.state.location}&destinationLocationCode=${this.state.destination}&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.false}&max=${this.state.max}`, {
+    fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${this.state.location}&destinationLocationCode=${this.state.destination}&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.nonStop}&max=${this.state.max}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_ACCESS}`
@@ -47,7 +43,7 @@ class Main extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(event)
+    this.fetchApiOne()
   }
 
   render () {
@@ -60,7 +56,7 @@ class Main extends React.Component {
     } else {
       return(
         <div>
-          <form onSubmit={(event) => {this.handleSubmit(event)}}>
+          <form onSubmit={this.handleSubmit}>
             <p>
               Location <input id="location" type="text" value={this.state.location} onChange={this.handleChange}/>
             </p>
