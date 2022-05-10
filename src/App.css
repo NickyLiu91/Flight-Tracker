@@ -5,3 +5,13 @@
 .ticket {
   border: solid 5px black
 }
+
+#main {
+  height: 50vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+#ticketList{
+  overflow-y: auto
+}

@@ -55,7 +55,7 @@ class Main extends React.Component {
       )
     } else {
       return(
-        <div>
+        <div id="main">
           <form onSubmit={this.handleSubmit}>
             <p>
               Location <input id="location" type="text" value={this.state.location} onChange={this.handleChange}/>
@@ -77,7 +77,7 @@ class Main extends React.Component {
             </p>
             <input type="submit" value="Submit" />
           </form>
-          <div>
+          <div id="ticketList">
             {this.generateTickets()}
           </div>
         </div>
