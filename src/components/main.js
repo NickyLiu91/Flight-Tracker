@@ -39,6 +39,17 @@ class Main extends React.Component {
     )
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value
+    })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(event)
+  }
+
   render () {
     if (this.state.tickets.length == true) {
       return(
@@ -49,25 +60,26 @@ class Main extends React.Component {
     } else {
       return(
         <div>
-          <form>
+          <form onSubmit={(event) => {this.handleSubmit(event)}}>
             <p>
-              Location <input type="text"/>
+              Location <input id="location" type="text" value={this.state.location} onChange={this.handleChange}/>
             </p>
             <p>
-              Destination <input type="text"/>
+              Destination <input id="destination" type="text" value={this.state.destination} onChange={this.handleChange}/>
             </p>
             <p>
-              DepartureDate <input type="text"/>
+              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange}/>
             </p>
             <p>
-              Adults <input type="text"/>
+              Adults <input id="adults" type="text" value={this.state.adults} onChange={this.handleChange}/>
             </p>
             <p>
-              NonStop <input type="text"/>
+              NonStop <input id="nonStop" type="text" value={this.state.nonStop} onChange={this.handleChange}/>
             </p>
             <p>
-              Max <input type="text"/>
+              Max <input id="max" type="text" value={this.state.max} onChange={this.handleChange}/>
             </p>
+            <input type="submit" value="Submit" />
           </form>
           <div>
             {this.generateTickets()}
