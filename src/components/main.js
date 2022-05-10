@@ -4,7 +4,14 @@ import Ticket from './ticket'
 class Main extends React.Component {
 
   state = {
-    tickets: []
+    tickets: [],
+    location: '',
+    destination: '',
+    departureDate: '',
+    adults: ''.
+    nonStop: '',
+    max: ''
+
   }
 
   componentDidMount = () => {
@@ -12,7 +19,7 @@ class Main extends React.Component {
   }
 
   fetchApiOne = () => {
-    fetch('https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=JFK&destinationLocationCode=HND&departureDate=2022-11-05&adults=1&nonStop=false&max=50', {
+    fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${this.state.location}&destinationLocationCode=${this.state.destination}&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.false}&max=${this.state.max}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_ACCESS}`
