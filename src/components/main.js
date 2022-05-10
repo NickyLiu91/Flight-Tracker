@@ -8,14 +8,14 @@ class Main extends React.Component {
     location: '',
     destination: '',
     departureDate: '',
-    adults: ''.
+    adults: '',
     nonStop: '',
     max: ''
 
   }
 
   componentDidMount = () => {
-    this.fetchApiOne()
+    // this.fetchApiOne()
   }
 
   fetchApiOne = () => {
@@ -40,7 +40,7 @@ class Main extends React.Component {
   }
 
   render () {
-    if (this.state.tickets.length == 0) {
+    if (this.state.tickets.length == true) {
       return(
         <div>
         LOADING
@@ -49,7 +49,29 @@ class Main extends React.Component {
     } else {
       return(
         <div>
-          {this.generateTickets()}
+          <form>
+            <p>
+              Location <input type="text"/>
+            </p>
+            <p>
+              Destination <input type="text"/>
+            </p>
+            <p>
+              DepartureDate <input type="text"/>
+            </p>
+            <p>
+              Adults <input type="text"/>
+            </p>
+            <p>
+              NonStop <input type="text"/>
+            </p>
+            <p>
+              Max <input type="text"/>
+            </p>
+          </form>
+          <div>
+            {this.generateTickets()}
+          </div>
         </div>
       )
     }
