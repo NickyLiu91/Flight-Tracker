@@ -74,7 +74,7 @@ class Main extends React.Component {
               Destination <input id="destination" type="text" value={this.state.destination} onChange={this.handleChange} placeHolder={"i.e.: HND"}/>
             </p>
             <p>
-              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange} placeHolder={"2022-11-05"}/>
+              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange} placeHolder={"2022-05-16"}/>
             </p>
             <p>
               Adults <input id="adults" type="text" value={this.state.adults} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>

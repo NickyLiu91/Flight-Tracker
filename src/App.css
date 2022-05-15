@@ -7,11 +7,20 @@
 }
 
 #main {
-  height: 50vh;
+  width: 100vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 
 #ticketList{
-  overflow-y: auto
+  height: 50vh;
+  overflow-y: auto;
+  border: solid 5px black
 }
