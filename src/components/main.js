@@ -9,10 +9,20 @@ class Main extends React.Component {
     destination: '',
     departureDate: '',
     adults: '',
+    children: '',
+    infants: '',
     nonStop: '',
     max: ''
-
   }
+
+  // originLocationCode=JFK
+  // destinationLocationCode=HND
+  // departureDate=2022-11-05
+  // adults=1
+  // children=1
+  // infants=1
+  // nonStop=false
+  // max=50
 
   fetchApiOne = () => {
     fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${this.state.location}&destinationLocationCode=${this.state.destination}&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.nonStop}&max=${this.state.max}`, {
@@ -58,24 +68,30 @@ class Main extends React.Component {
         <div id="main">
           <form onSubmit={this.handleSubmit}>
             <p>
-              Location <input id="location" type="text" value={this.state.location} onChange={this.handleChange}/>
+              Location <input id="location" type="text" value={this.state.location} onChange={this.handleChange} placeHolder={"i.e.: JWD"}/>
             </p>
             <p>
-              Destination <input id="destination" type="text" value={this.state.destination} onChange={this.handleChange}/>
+              Destination <input id="destination" type="text" value={this.state.destination} onChange={this.handleChange} placeHolder={"i.e.: HND"}/>
             </p>
             <p>
-              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange}/>
+              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange} placeHolder={"2022-11-05"}/>
             </p>
             <p>
-              Adults <input id="adults" type="text" value={this.state.adults} onChange={this.handleChange}/>
+              Adults <input id="adults" type="text" value={this.state.adults} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>
             </p>
             <p>
-              NonStop <input id="nonStop" type="text" value={this.state.nonStop} onChange={this.handleChange}/>
+              Children <input id="children" type="text" value={this.state.children} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>
             </p>
             <p>
-              Max <input id="max" type="text" value={this.state.max} onChange={this.handleChange}/>
+              Infants <input id="infants" type="text" value={this.state.infants} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>
             </p>
-            <input type="submit" value="Submit" />
+            <p>
+              NonStop <input id="nonStop" type="text" value={this.state.nonStop} onChange={this.handleChange} placeHolder={"i.e.: false"}/>
+            </p>
+            <p>
+              Max <input id="max" type="text" value={this.state.max} onChange={this.handleChange} placeHolder={"i.e.: 50"}/>
+            </p>
+            <input type="submit" value="Submit"/>
           </form>
           <div id="ticketList">
             {this.generateTickets()}
