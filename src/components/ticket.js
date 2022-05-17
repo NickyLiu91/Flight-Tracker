@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Ticket = (props) => {
-  console.log(props.ticket)
   return (
     <div className="ticket">
       <p>Final Ticket Date: {props.ticket.lastTicketingDate}</p>

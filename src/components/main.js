@@ -24,12 +24,20 @@ class Main extends React.Component {
   // nonStop=false
   // max=50
 
+  // ${base}originLocationCode=${this.state.originLocationCode}&destinationLocationCode=HND&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.nonStop}&max=${this.state.max}
+
   fetchApiOne = () => {
-    console.log(this.state)
-    console.log(this.state.originLocationCode)
-    console.log(this.state.destinationLocationCode)
     let base = `https://test.api.amadeus.com/v2/shopping/flight-offers?`
-    fetch(`${base}originLocationCode=${this.state.originLocationCode}&destinationLocationCode=HND&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.nonStop}&max=${this.state.max}`, {
+    let stateObj = this.state
+    for (const key in stateObj) {
+      if (key == 'originLocationCode') {
+        base += `${key}=${stateObj[key]}`
+      } else if (key != 'tickets' && stateObj[key] != '') {
+        base += `&${key}=${stateObj[key]}`
+      }
+    }
+    console.log(base)
+    fetch(`${base}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_ACCESS}`
