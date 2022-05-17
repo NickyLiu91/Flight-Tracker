@@ -5,8 +5,8 @@ class Main extends React.Component {
 
   state = {
     tickets: [],
-    location: '',
-    destination: '',
+    originLocationCode: '',
+    destinationLocationCode: '',
     departureDate: '',
     adults: '',
     children: '',
@@ -25,7 +25,11 @@ class Main extends React.Component {
   // max=50
 
   fetchApiOne = () => {
-    fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${this.state.location}&destinationLocationCode=${this.state.destination}&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.nonStop}&max=${this.state.max}`, {
+    console.log(this.state)
+    console.log(this.state.originLocationCode)
+    console.log(this.state.destinationLocationCode)
+    let base = `https://test.api.amadeus.com/v2/shopping/flight-offers?`
+    fetch(`${base}originLocationCode=${this.state.originLocationCode}&destinationLocationCode=HND&departureDate=${this.state.departureDate}&adults=${this.state.adults}&nonStop=${this.state.nonStop}&max=${this.state.max}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_ACCESS}`
@@ -68,10 +72,10 @@ class Main extends React.Component {
         <div id="main">
           <form onSubmit={this.handleSubmit}>
             <p>
-              Location <input id="location" type="text" value={this.state.location} onChange={this.handleChange} placeHolder={"i.e.: JWD"}/>
+              Location <input id="originLocationCode" type="text" value={this.state.originLocationCode} onChange={this.handleChange} placeHolder={"i.e.: JWD"}/>
             </p>
             <p>
-              Destination <input id="destination" type="text" value={this.state.destination} onChange={this.handleChange} placeHolder={"i.e.: HND"}/>
+              Destination <input id="destinationLocationCode" type="text" value={this.state.destinationLocationCode} onChange={this.handleChange} placeHolder={"i.e.: HND"}/>
             </p>
             <p>
               DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange} placeHolder={"2022-05-16"}/>
