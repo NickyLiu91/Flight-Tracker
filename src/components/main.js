@@ -93,9 +93,8 @@ class Main extends React.Component {
             </p>
             <input type="submit" value="Submit"/>
           </form>
-          <div id="ticketList">
-            {this.generateTickets()}
-          </div>
+          {this.state.tickets.length > 0 ? <div id="ticketList">{this.generateTickets()}</div> : null}
+
         </div>
       )
     }
