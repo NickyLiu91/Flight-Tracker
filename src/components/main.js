@@ -36,7 +36,6 @@ class Main extends React.Component {
         base += `&${key}=${stateObj[key]}`
       }
     }
-    console.log(base)
     fetch(`${base}`, {
       method: 'GET',
       headers: {
@@ -68,6 +67,28 @@ class Main extends React.Component {
     this.fetchApiOne()
   }
 
+  test = () => {
+    console.log("??????")
+    // fetch(`https://www.air-port-codes.com/api/v1/multi?term=New%20York`, {
+    //   method: 'POST',
+    //   header: {
+    //     'Content-type': 'application/x-www-form-urlencoded',
+    //     'APC-Auth': process.env.REACT_APP_CODE_API,
+    //     'APC-Auth-Secret': process.env.REACT_APP_CODE_API_SECRET
+    //   }
+    // })
+    // .then(res => res.json())
+    // .then(res => {console.log(res)})
+    fetch('https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=New&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_LOCATION_ACCESS}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {console.log(res)})
+  }
+
   render () {
     if (this.state.tickets.length == true) {
       return(
@@ -80,31 +101,32 @@ class Main extends React.Component {
         <div id="main">
           <form onSubmit={this.handleSubmit}>
             <p>
-              Location <input id="originLocationCode" type="text" value={this.state.originLocationCode} onChange={this.handleChange} placeHolder={"i.e.: JWD"}/>
+              Location <input id="originLocationCode" type="text" value={this.state.originLocationCode} onChange={this.handleChange} placeholder={"i.e.: JWD"}/>
             </p>
             <p>
-              Destination <input id="destinationLocationCode" type="text" value={this.state.destinationLocationCode} onChange={this.handleChange} placeHolder={"i.e.: HND"}/>
+              Destination <input id="destinationLocationCode" type="text" value={this.state.destinationLocationCode} onChange={this.handleChange} placeholder={"i.e.: HND"}/>
             </p>
             <p>
-              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange} placeHolder={"2022-05-16"}/>
+              DepartureDate <input id="departureDate" type="text" value={this.state.departureDate} onChange={this.handleChange} placeholder={"2022-05-16"}/>
             </p>
             <p>
-              Adults <input id="adults" type="text" value={this.state.adults} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>
+              Adults <input id="adults" type="text" value={this.state.adults} onChange={this.handleChange} placeholder={"i.e.: 1"}/>
             </p>
             <p>
-              Children <input id="children" type="text" value={this.state.children} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>
+              Children <input id="children" type="text" value={this.state.children} onChange={this.handleChange} placeholder={"i.e.: 1"}/>
             </p>
             <p>
-              Infants <input id="infants" type="text" value={this.state.infants} onChange={this.handleChange} placeHolder={"i.e.: 1"}/>
+              Infants <input id="infants" type="text" value={this.state.infants} onChange={this.handleChange} placeholder={"i.e.: 1"}/>
             </p>
             <p>
-              NonStop <input id="nonStop" type="text" value={this.state.nonStop} onChange={this.handleChange} placeHolder={"i.e.: false"}/>
+              NonStop <input id="nonStop" type="text" value={this.state.nonStop} onChange={this.handleChange} placeholder={"i.e.: false"}/>
             </p>
             <p>
-              Max <input id="max" type="text" value={this.state.max} onChange={this.handleChange} placeHolder={"i.e.: 50"}/>
+              Max <input id="max" type="text" value={this.state.max} onChange={this.handleChange} placeholder={"i.e.: 50"}/>
             </p>
             <input type="submit" value="Submit"/>
           </form>
+          <button onClick={this.test}>Click</button>
           {this.state.tickets.length > 0 ? <div id="ticketList">{this.generateTickets()}</div> : null}
 
         </div>
