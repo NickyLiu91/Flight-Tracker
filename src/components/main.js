@@ -78,8 +78,8 @@ class Main extends React.Component {
     })
     .then(res => res.json())
     .then(res => {
-      console.log(res)
-      let allCodes = res.data.map(obj => obj.iataCode)
+      console.log(res.data)
+      let allCodes = res.data.map(obj => {return {name: obj.name, code: obj.iataCode}})
 
       this.setState({
         allAirports: allCodes
