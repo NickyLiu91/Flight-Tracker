@@ -13,6 +13,7 @@ class Main extends React.Component {
     infants: '',
     nonStop: '',
     max: '',
+    locationName: '',
     allAirports: []
   }
 
@@ -68,24 +69,31 @@ class Main extends React.Component {
     this.fetchApiOne()
   }
 
-  test = () => {
-    console.log("??????")
-    fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=New&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_LOCATION_ACCESS}`
-      }
-    })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res.data)
-      let allCodes = res.data.map(obj => {return {name: obj.name, code: obj.iataCode}})
+  searchLocationName = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value
+    }, () => {
+      fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=${this.state.locationName}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_LOCATION_ACCESS}`
+        }
+      })
+      .then(res => res.json())
+      .then(res => {
+        let allCodes = res.data.map(obj => {return {name: obj.name, code: obj.iataCode}})
 
-      this.setState({
-        allAirports: allCodes
+        this.setState({
+          allAirports: allCodes
+        })
       })
     })
-    .then(res => {console.log(this.state.allAirports)})
+  }
+
+  generateListOfCodes = () =>  {
+    this.state.allAirports.map(city =>
+      <li>{city.name}</li>
+    )
   }
 
   render () {
@@ -126,6 +134,12 @@ class Main extends React.Component {
             <input type="submit" value="Submit"/>
           </form>
           <button onClick={this.test}>Click</button>
+          <p>
+            Location Name <input id="locationName" type="text" value={this.state.locationName} onChange={this.searchLocationName} placeholder={"i.e.: New York"}/>
+          </p>
+          <ul>
+            {this.generateListOfCodes()}
+          </ul>
           {this.state.tickets.length > 0 ? <div id="ticketList">{this.generateTickets()}</div> : null}
 
         </div>
