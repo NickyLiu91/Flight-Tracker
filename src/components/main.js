@@ -12,7 +12,8 @@ class Main extends React.Component {
     children: '',
     infants: '',
     nonStop: '',
-    max: ''
+    max: '',
+    allAirports: []
   }
 
   // originLocationCode=JFK
@@ -69,24 +70,22 @@ class Main extends React.Component {
 
   test = () => {
     console.log("??????")
-    // fetch(`https://www.air-port-codes.com/api/v1/multi?term=New%20York`, {
-    //   method: 'POST',
-    //   header: {
-    //     'Content-type': 'application/x-www-form-urlencoded',
-    //     'APC-Auth': process.env.REACT_APP_CODE_API,
-    //     'APC-Auth-Secret': process.env.REACT_APP_CODE_API_SECRET
-    //   }
-    // })
-    // .then(res => res.json())
-    // .then(res => {console.log(res)})
-    fetch('https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=New&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL', {
+    fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=New&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_LOCATION_ACCESS}`
       }
     })
     .then(res => res.json())
-    .then(res => {console.log(res)})
+    .then(res => {
+      console.log(res)
+      let allCodes = res.data.map(obj => obj.iataCode)
+
+      this.setState({
+        allAirports: allCodes
+      })
+    })
+    .then(res => {console.log(this.state.allAirports)})
   }
 
   render () {
