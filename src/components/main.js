@@ -85,14 +85,15 @@ class Main extends React.Component {
 
         this.setState({
           allAirports: allCodes
-        }, () => {console.log(this.state.allAirports)})
+        })
       })
     })
   }
 
   generateListOfCodes = () =>  {
-    this.state.allAirports.map(city =>
-      <li>{city.name}</li>
+    console.log(this.state.allAirports)
+    return this.state.allAirports.map(city =>
+      <option>{city.name}</option>
     )
   }
 
@@ -109,6 +110,10 @@ class Main extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <p>
               Location <input id="originLocationCode" type="text" value={this.state.originLocationCode} onChange={this.handleChange} placeholder={"i.e.: JWD"}/>
+              <p>
+                Use the <a href="https://www.iata.org/en/publications/directories/code-search/">link</a> to find your airport code or enter a city
+                name to find associated airport codes
+              </p>
             </p>
             <p>
               Destination <input id="destinationLocationCode" type="text" value={this.state.destinationLocationCode} onChange={this.handleChange} placeholder={"i.e.: HND"}/>
@@ -136,10 +141,10 @@ class Main extends React.Component {
           <button onClick={this.test}>Click</button>
           <p>
             Location Name <input id="locationName" type="text" value={this.state.locationName} onChange={this.searchLocationName} placeholder={"i.e.: New York"}/>
-          </p>
-          <ul>
+            <select>
             {this.generateListOfCodes()}
-          </ul>
+            </select>
+          </p>
           {this.state.tickets.length > 0 ? <div id="ticketList">{this.generateTickets()}</div> : null}
 
         </div>
