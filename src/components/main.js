@@ -70,25 +70,48 @@ class Main extends React.Component {
   }
 
   searchLocationName = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value
-    }, () => {
-      fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=${this.state.locationName}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_LOCATION_ACCESS}`
-        }
-      })
-      .then(res => res.json())
-      .then(res => {
-        let allCodes = res.data.map(obj => {return {name: obj.name, code: obj.iataCode}})
+    // this.setState({
+    //   [event.target.id]: event.target.value
+    // }, () => {
+    //   fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=${this.state.locationName}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`, {
+    //     method: 'GET',
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.REACT_APP_LOCATION_ACCESS}`
+    //     }
+    //   })
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     let allCodes = res.data.map(obj => {return {name: obj.name, code: obj.iataCode}})
+    //
+    //     this.setState({
+    //       allAirports: allCodes
+    //     })
+    //   })
+    // })
+    // fetch('https://test.api.amadeus.com/v1/reference-data/airlines',  {
+    //   method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer ${process.env.REACT_APP_CODES_ACCESS}`
+    //       }
+    // })
+    // .then(res => {console.log(res)})
+  }
 
-        this.setState({
-          allAirports: allCodes
-        })
-      })
+  test = () => {
+    fetch('https://test.api.amadeus.com/v1/reference-data/airlines',  {
+      method: 'GET',
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_CODES_ACCESS}`
+          }
+    })
+    .then(res => res.json())
+    .then(res => {
+      this.setState({
+        allAirports: res.data
+      }, () => {console.log(this.state.allAirports)})
     })
   }
+
 
   generateListOfCodes = () =>  {
     this.state.allAirports.map(city =>
